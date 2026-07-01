@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>PATH Reporting</title>
@@ -15,6 +16,7 @@
       </div>
 
       <div class="headerButtons">
+        <button id="backToSummaryBtn" onclick="backToSummary()" style="display:none;">Back to Summary</button>
         <button onclick="resetDefaultSort()">Reset Sort</button>
         <button onclick="downloadCsv()">Export Current View CSV</button>
       </div>
@@ -55,9 +57,43 @@
         Search
         <input id="searchBox" type="text" placeholder="Badge name..." oninput="renderCurrentView()">
       </label>
+
+      <div class="viewModeSwitch">
+        <div class="filterLabel">View</div>
+
+        <div class="switchRow">
+          <span class="switchLabel active" id="offeringLabel">Offering</span>
+
+          <label class="switch">
+            <input id="combineOfferingsCheck" type="checkbox" onchange="toggleDisplayMode()">
+            <span class="slider"></span>
+          </label>
+
+          <span class="switchLabel" id="badgeLabel">Merit Badge</span>
+        </div>
+      </div>
+
     </section>
 
+    <div class="resetFilterRow">
+      <button class="secondaryButton" onclick="resetFilters()">
+        Reset Filters
+      </button>
+    </div>
+
     <section id="summaryCards" class="cards"></section>
+
+    <!--
+    <div class="resetMetricsRow">
+      <button class="secondaryButton" onclick="resetMetrics()">
+        Restore Default Cards
+      </button>
+    </div>
+    -->
+
+    <div class="metricNote">
+      Note: Some comparative metrics exclude designated offerings where appropriate.
+    </div>
 
     <main>
       <table>
@@ -86,4 +122,5 @@
   <script src="js/export.js"></script>
   <script src="js/app.js"></script>
 </body>
+
 </html>

@@ -58,3 +58,74 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+function escapeJs(value) {
+  return String(value ?? "")
+    .replace(/\\/g, "\\\\")
+    .replace(/'/g, "\\'")
+    .replace(/"/g, "&quot;");
+}
+
+function combineBadgeRows(rows) {
+  const map = new Map();
+
+  for (const r of rows) {
+    const key = [
+      r.year || "",
+      r.session || "",
+      r.area || "",
+      r.badgeName || ""
+    ].join("|");
+
+    if (!map.has(key)) {
+      map.set(key, {
+        ...r,
+        time: new Set(),
+        enrollment: 0,
+        earned: 0,
+        notEarned: 0,
+        weeksOffered: 0,
+        _retentionWeightedTotal: 0,
+        _completionWeightedTotal: 0,
+        _avgWeeklyEnrollmentTotal: 0,
+        _rowCount: 0
+      });
+    }
+
+    const out = map.get(key);
+
+    if (r.time) out.time.add(r.time);
+
+    const enrollment = Number(r.enrollment || 0);
+    const earned = Number(r.earned || 0);
+    const notEarned = Number(r.notEarned || 0);
+
+    out.enrollment += enrollment;
+    out.earned += earned;
+    out.notEarned += notEarned;
+
+    out.weeksOffered += Number(r.weeksOffered || 0);
+    out._avgWeeklyEnrollmentTotal += Number(r.avgWeeklyEnrollment || 0);
+
+    out._retentionWeightedTotal += Number(r.retentionPct || 0) * enrollment;
+    out._completionWeightedTotal += Number(r.completionPct || 0) * enrollment;
+
+    out._rowCount++;
+  }
+
+  return [...map.values()].map(r => {
+    const enrollment = Number(r.enrollment || 0);
+
+    return {
+      ...r,
+      time: sortTimes([...r.time]).join(", "),
+      retentionPct: enrollment ? r._retentionWeightedTotal / enrollment : 0,
+      completionPct: enrollment ? r._completionWeightedTotal / enrollment : 0,
+      avgWeeklyEnrollment: r._rowCount ? r._avgWeeklyEnrollmentTotal / r._rowCount : 0
+    };
+  });
+}
+
+function sortTimes(times) {
+  return times.sort((a, b) => compareTime(a, b));
+}

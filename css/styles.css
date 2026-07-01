@@ -41,15 +41,47 @@ button {
   gap: 8px;
 }
 
+.secondaryButton {
+  background: white;
+  color: #1f2933;
+  border: 1px solid #c9d3dc;
+}
+
+.secondaryButton:hover {
+  background: #f3f5f7;
+}
+
+.linkButton {
+  border: 0;
+  background: transparent;
+  color: #1f2933;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.linkButton:hover {
+  text-decoration: underline;
+}
+
 .filters {
   display: grid;
-  grid-template-columns: repeat(6, minmax(140px, 1fr));
+  grid-template-columns:
+    1fr
+    1fr
+    1fr
+    1fr
+    1fr
+    250px
+    max-content;
   gap: 12px;
-  margin-bottom: 16px;
+  align-items: end;
   background: white;
   padding: 14px;
   border-radius: 10px;
   border: 1px solid #dde3ea;
+  margin-bottom: 8px;
 }
 
 label {
@@ -77,11 +109,111 @@ input {
   box-sizing: border-box;
 }
 
+.checkboxFilter {
+  display: grid;
+  grid-template-rows: auto 36px;
+  align-self: start;
+  width: max-content;
+}
+
+.filterLabel {
+  font-size: 12px;
+  font-weight: bold;
+  color: #52616b;
+  line-height: 1;
+  margin: 0 0 5px;
+  text-align: left;
+}
+
+.checkboxFilter input {
+  width: 16px;
+  height: 16px;
+  margin: 9px auto 0;
+}
+
+.viewModeSwitch {
+  display: flex;
+  flex-direction: column;
+}
+
+.switchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.switchLabel {
+  font-size: 12px;
+  color: #687782;
+  user-select: none;
+}
+
+.switchLabel.active {
+  color: #1f2933;
+  font-weight: bold;
+}
+
+.switch {
+  position: relative;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #c9d3dc;
+  border-radius: 22px;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  top: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: .2s;
+}
+
+.switch input:checked + .slider {
+  background: #1f2933;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.resetFilterRow,
+.resetMetricsRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.resetFilterRow {
+  margin: 0 0 18px;
+}
+
+.resetMetricsRow {
+  margin: 8px 0 10px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(4, minmax(160px, 1fr));
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .card {
@@ -101,6 +233,30 @@ input {
   font-size: 22px;
   font-weight: bold;
   margin-top: 5px;
+}
+
+.cardSelect {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #687782;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0 0 5px;
+  cursor: pointer;
+}
+
+.cardSelect:focus {
+  outline: 1px solid #c9d3dc;
+  border-radius: 4px;
+}
+
+.metricNote {
+  margin: 14px;
+  color: #687782;
+  font-size: 12px;
+  font-style: italic;
 }
 
 main {
@@ -150,4 +306,44 @@ tr:hover {
   padding: 30px;
   text-align: center;
   color: #687782;
+}
+
+@media (max-width: 1100px) {
+  .filters {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
+
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 650px) {
+  .app {
+    padding: 12px;
+  }
+
+  .filters,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .headerButtons {
+    flex-wrap: wrap;
+  }
+
+  .resetFilterRow,
+  .resetMetricsRow {
+    justify-content: stretch;
+  }
+
+  .resetFilterRow button,
+  .resetMetricsRow button {
+    width: 100%;
+  }
 }
