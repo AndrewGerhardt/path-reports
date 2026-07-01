@@ -1,0 +1,153 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f6f7f9;
+  color: #1f2933;
+}
+
+.app {
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+p {
+  margin: 4px 0 0;
+  color: #687782;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #1f2933;
+  color: white;
+  cursor: pointer;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+  background: white;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #dde3ea;
+}
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #52616b;
+}
+
+.disabledFilter {
+  opacity: 0.45;
+  cursor: help;
+}
+
+.disabledFilter select {
+  cursor: not-allowed;
+}
+
+select,
+input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 8px;
+  border: 1px solid #c9d3dc;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #dde3ea;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.card .label {
+  color: #687782;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.card .value {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+main {
+  background: white;
+  border: 1px solid #dde3ea;
+  border-radius: 10px;
+  overflow: auto;
+  max-height: 570px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #eef2f5;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ccd6df;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+th.num {
+  text-align: right;
+}
+
+td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #edf0f2;
+  white-space: nowrap;
+}
+
+tr:hover {
+  background: #f8fafc;
+}
+
+.num {
+  text-align: right;
+}
+
+.empty {
+  padding: 30px;
+  text-align: center;
+  color: #687782;
+}
