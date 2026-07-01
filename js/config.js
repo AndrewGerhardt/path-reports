@@ -1,4 +1,4 @@
-const API_URL = "/api/offering-planning";
+const API_URL = `${ENV.apiBase}/offering-planning`;
 
 const TIME_ORDER = {
   "9:00": 1,

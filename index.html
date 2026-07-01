@@ -67,6 +67,15 @@
     </main>
   </div>
 
+  <script>
+    const isLocal =
+      location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1";
+
+    document.write(
+      `<script src="js/${isLocal ? "env.local" : "env"}.js"><\/script>`
+    );
+  </script>
   <script src="js/config.js"></script>
   <script src="js/state.js"></script>
   <script src="js/utils.js"></script>
